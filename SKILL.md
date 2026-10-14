@@ -1,12 +1,12 @@
 ---
 name: anti-median-chinese
-version: 0.3.0
+version: 0.4.0
 description: 诊断并改善「中位数中文」——AI 时代被算法和高频共识拉平的扁平化中文。用于识别和改造缺乏画面感、节奏感和个人声音的中文文本，让中文从「通顺但寡淡」恢复到「具体且有呼吸」。当用户提交一段中文（AI 生成的或自己写的）希望去 AI 味、加质感、增画面、调节奏时，请使用此 skill。当用户说「这段太干」「读起来没味道」「有 AI 味」「文字扁平」「帮我打磨一下文风」「中文味道不对」「读着不像人写的」时，也应触发。公众号文章润色、终稿前的「加味」打磨、写作风格诊断、AI 生成内容的去机器化都属于此 skill 范围。即使用户只贴了一段文字没明说要改什么，也应主动用这个 skill 做诊断并给出建议。注意：本 skill 是诊断+改造工具，不是文章生成工具；用于稿子完成后的质感打磨，与 wechat-workflow 互补。
 ---
 
 # 反中位数中文 Skill
 
-> 版本 0.3.0 · 七维诊断 + 轻量/长文/回退三种工作模式
+> 版本 0.4.0 · 七维诊断 + 多模式流程 + eval 回归 + 微信写作衔接
 
 ## 什么是「中位数中文」
 
@@ -44,6 +44,8 @@ description: 诊断并改善「中位数中文」——AI 时代被算法和高�
 | 诊断 | `references/diagnostics.md` |
 | 改造举例 | `references/examples.md` |
 | 换词与句式 | `references/word-bank.md` |
+| 接 wechat-workflow | `references/wechat-handoff.md` |
+| 改 skill 后自检 / 边界拿不准 | `references/evals.md` |
 
 模式选择：
 
@@ -266,13 +268,20 @@ AI 中文倾向于剥离语气。修复手法：
 ## 30 秒路径（给执行者）
 
 1. 判断「传信息还是传人」：前者停
-2. 选模式：轻量 / 完整 / 长文
+2. 选模式：轻量 / 完整 / 长文 / 回退
 3. 打开 `references/diagnostics.md`，标症状，写「优先动手」
 4. 需要换词时再开 `references/word-bank.md`；需要对照时再开 `references/examples.md`
 5. 自检四条后再发出
+6. 若刚改过本 skill 的规则：用 `references/evals.md` 最低集（E01、E02、E04、E06、E08）冒烟
+
+## 回归自检（改 skill 时）
+
+修改诊断维度、输出格式、模式切换或 wechat 衔接后，按 `references/evals.md` 跑样例。最低集必须全过；涉及长文或标点规范时补跑 E07、E09。
+
+对用户日常请求不必主动跑 eval；只在维护本 skill 或边界打架时用。
 
 ## 与其他 skill 的关系
 
-- 与 `wechat-workflow` **互补**：wechat-workflow 是从零到稿的工作流，本 skill 是稿子完成后的质感打磨。可以在 wechat-workflow Step 7（传播优化）后选择性触发本 skill。
+- 与 `wechat-workflow` **互补**：wechat-workflow 是从零到稿的工作流，本 skill 是稿子完成后的质感打磨。挂在 Step 7（传播优化）之后，细则见 `references/wechat-handoff.md`。
 - 与 `wechat-writing-style` **互补**：wechat-writing-style 定义了格式规范（中英文空格、不用破折号、引号用「」等），本 skill 处理格式之外更深一层的东西（动词、节奏、留白、语气、套话）。
-- 与 `wechat-writing-style` **不冲突**：本 skill 的改造建议必须先满足 wechat-writing-style 的硬性规范，再追求质感。如果同时适用公众号写作规范，优先不用破折号；需要停顿、解释或转折时，用冒号、分号、短句或换段替代。
+- 与 `wechat-writing-style` **不冲突**：本 skill 的改造建议必须先满足 wechat-writing-style 的硬性规范，再追求质感。如果同时适用公众号写作规范，优先不用破折号；需要停顿、解释或转折时，用冒号、分号、短句或换段替代。冲突时：硬规范 > 质感。

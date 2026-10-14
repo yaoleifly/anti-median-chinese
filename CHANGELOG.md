@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+- 新增 `references/evals.md`：10 条行为回归样例，最低必跑 E01 / E02 / E04 / E06 / E08
+- 新增 `references/wechat-handoff.md`：挂在 wechat-workflow Step 7 之后的位置、职责切分、触发话术与交接物
+- `SKILL.md`：参考文件表纳入 evals / handoff；增加「回归自检」；明确冲突时硬规范 > 质感
+
 ## 0.3.0
 
 - 新增长文分段模式（采样诊断 → 优先区示范 → 询问下一节）
